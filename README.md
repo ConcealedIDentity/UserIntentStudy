@@ -2,8 +2,29 @@
 
  This GitHub repository is anonymized for review.
 
- The collect data with gpt-3.5-turbo-1106 and gpt-4-1106-preview are located in the corresponding JSON files. The items names as "previous user question" and "previous GPT answer" asre sampled from:
-  Lhoest, Q., del Moral, A. V., Jernite, Y., Thakur, A., von Platen, P., Patil, S., ... & Wolf, T. (2021). Datasets: A community library for natural language processing. arXiv preprint arXiv:2109.02846.
+## Data Collection
+ The data collected with gpt-3.5-turbo-1106 and gpt-4-1106-preview are in the corresponding JSON files.
+ 
+
+## User Study Design
+ The UserStudyDesign.pdf contains more information about the exact design of our study.
+
+ ### Chat History
+ To strive for an even data distribution and avoid "small talk" conversations, we provided a question-answer pair as chat history before the participants interacted with GPT and asked them to continue the conversations. The chat histories were selected from the Hugging Face dataset (Lhoest, Q., del Moral, A. V., Jernite, Y., Thakur, A., von Platen, P., Patil, S., ... & Wolf, T. (2021). Datasets: A community library for natural language processing. arXiv preprint arXiv:2109.02846.). We selected 240 samples (10 per each fine-granular intent category). Each participant interacted with GPT 10 times during the study, where ten different fine-granular intent categories were selected randomly. The exact chat history question-answer pairs with the corresponding fine-granular intent category and is saved in the chat_history.json file for reproducibility.
+
+ ### Prompting details for reproducibility:
+ 
+ #### User Study Phase 1: Quality of Intent Recognition by State-of-the-Art LLMs
+ The participants were introduced to conversational contexts extracted from a publicly accessible dataset (see Chat History) and were asked to continue these dialogues. The answer from the underlying LLM was generated with the prompt: 'Suppose that a user previously asked you the question (-history question-) and you gave the user this answer (-history answer-). Please answer the following question in a maximum 2500 characters: -user question-.'
+ Then the LLM analyzed the user’s prompt to recognize their intent: 'Here is a conversation between the user (Anonymous) and the AI assistant (Chat GPT). Please analyze the potential intent of the user's upcoming question, and identify it as one of the following 24 categories. Please reply only with the category number (numeric) and the category name, and return only the most probable category. No explanation is needed. The 24 intent categories are as follows: [ 1. Factual Queries: Requests for specific facts or data; 2. Explanatory Inquiries: Explanations or clarifications about concepts, events, phenomena; 3. Tutorial Requests: Step-by-step instructions or guidance; 4. Troubleshooting Assistance: Diagnose and resolve issues or problems; 5. Decision Support: Assistance in decision-making through insights, comparisons, evaluations; 6. Planning and Organization: Aid in planning events, organizing tasks, or managing projects; 7. Idea Generation: Inspiration or ideas for creative projects; 8. Content Creation: Help in writing, visually representing, or designing original content; 9. Artistic Exploration: Exploration of artistic styles, techniques, historical art contexts; 10. Learning Support: Assistance with understanding educational material or concepts; 11. Skill Development: Guidance on developing specific skills or competencies; 12. Curricular Planning: Help in designing or choosing educational curricula or courses; 13. Conversational Engagement: Dialogue for entertainment, companionship, interaction; 14. Personal Advice: Advice on personal matters or life decisions. 15. Reflection and Insight: Help in self-reflection, personal growth, or to gain insights into certain behavior or thoughts; 16. Technical Guidance: Assistance with technical tasks, coding, or problem-solving in a professional context; 17. Business and Career Advice: Guidance on business, career choices, or professional development; 18. Industry-Specific Inquiries: Requests for information or assistance specific to certain industries or professional fields; 19. Service Utilization: Requests to use specific functionalities of the model (e.g., language translation, summarization); 20. Data Processing: Help in processing, analyzing, or visualizing data; 21. Task Automation: Inquiries about automating tasks or workflows; 22. Moral and Ethical Queries: Questions about ethical dilemmas, moral principles, or philosophical theories; 23. Societal and Cultural Inquiry: Exploring societal, cultural, or historical topics; 24. Existential Questions: Delving into existential themes or abstract philosophical questions] The conversation content is: User: -user question- ChatGPT: -GPT answer-'
+Lastly, the participants were then asked whether they agreed with the intent category identified by the LLM In cases where participants disagreed with the detected intent, they were asked to select a more suitable category from our intent taxonomy.
+
+ #### User Study Phase 1:  Effect of Intent-based Prompt Reformulation on User Satisfaction
+ The underlying LLM generated one of the responses directly from the original user prompt, while the other response was generated based on the reformulated user prompt aligning with the correctly identified intent category. Before generating the response for the reformulated user input, a grammar check was conducted: 'Correct the following sentence grammatically: -user question-'. Then, the LLM response was generated with the prompt corresponding to the fine-granular intent category: 'Suppose that a user previously asked you the question (-history question-) and you gave the user this answer (-history answer-). Please answer the following question in a maximum 2500 characters, while taking the chat history into consideration:  -prompt corresponding to the intent category- the user input: -grammatically correct user question-'.
+
+ The original LLM answers were loaded from Phase 1. The order of the displayed answers was randomized, the first answer displayed over the 10 questions: original, original, reprompted, reprompted, reprompted, reprompted, original, reprompted, original, original.
+		
+ 
+ 
 
 
-The UserStudyDesign.pdf contains more information about the exact design of our study.
