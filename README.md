@@ -1,4 +1,5 @@
 # Analyzing Intent Recognition and Prompt Reformulation in ChatGPT: A User Study
+<img width="1118" alt="approach" src="https://github.com/ConcealedIDentity/UserIntentStudy/assets/141405318/5e830f74-c73f-451e-85a7-0aae9ea35b8c">
 
  This GitHub repository is anonymized for review.
 
